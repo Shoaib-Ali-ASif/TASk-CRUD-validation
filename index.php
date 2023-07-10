@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
     $user = $_SESSION['user'];
 } else {
-    header('location: ./login.php'); 
+    header('location: ./login.php');
 }
 
 ?>
@@ -12,6 +12,9 @@ if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
 <html lang="en">
 
 <head>
+    <script type="text/javascript">
+        window.history.forward();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
@@ -28,8 +31,8 @@ if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
                         <a href="./logout.php" class="btn btn-outline-danger">Logout</a>
                     </div>
                     <div class="card-body">
-                      
-                    <h3>Welcome <?php echo $user['name'] . " ! " ?></h3>
+
+                        <h3>Welcome <?php echo $user['name'] . " ! " ?></h3>
                     </div>
                 </div>
             </div>
