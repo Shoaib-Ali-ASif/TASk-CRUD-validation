@@ -1,17 +1,14 @@
 <?php require_once('./database/connection.php') ?>
 
 <?php
-session_start();
-if(isset($_SESSION['user']) && !empty($_SESSION['user'])) {
-    $user = $_SESSION['user'];
+
+if(isset($_SESSION['register']) && !empty($_SESSION['register'])) {
+    $register = $_SESSION['register'];
     header('location: ./login.php'); 
 }
 $name = $email = "";
 
 if (isset($_POST['submit'])) {
-    // echo "<pre>";
-    // print_r($_POST);
-    // echo "</pre>";
 
     $name = htmlspecialchars($_POST['name']);
     $email = htmlspecialchars($_POST['email']);
@@ -27,12 +24,12 @@ if (isset($_POST['submit'])) {
     } elseif ($password !== $password_confirmation) {
         $error = "Your password does not match!";
     } else {
-        $sql = "SELECT * FROM `users` WHERE `email` = '$email'";
+        $sql = "SELECT * FROM `register` WHERE `email` = '$email'";
         $result = $conn->query($sql);
 
         if($result->num_rows == 0) {
             $hashed_password = sha1($password);
-            $sql = "INSERT INTO `users`(`name`, `email`, `password`) VALUES ('$name','$email','$hashed_password')";
+            $sql = "INSERT INTO `regiter`(`name`, `email`, `password`) VALUES ('$name','$email','$hashed_password')";
             $is_created = $conn->query($sql);
             if($is_created) {
                 $success = 'Account Created! Press login to continue';
@@ -66,7 +63,7 @@ if (isset($_POST['submit'])) {
                     </div>
                     <div class="card-body">
 
-                        <?php require_once('./partials/alerts.php'); ?>
+                        
 
                         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                             <div class="mb-3">
@@ -95,7 +92,7 @@ if (isset($_POST['submit'])) {
                             </div>
 
                             <div class="text-center">
-                                Already have an account? <a href="./login.php">Login</a>
+                                Already have an account? <a href="./">Login</a>
                             </div>
                         </form>
                     </div>
